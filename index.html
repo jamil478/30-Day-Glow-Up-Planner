@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30 Days to Glow | Your Glow-Up Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@200;300;400;500&family=Great+Vibes&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blush: #F5E6E0;
+  --blush-mid: #EDD5CB;
+  --blush-deep: #D4A090;
+  --rose: #C4726A;
+  --rose-dark: #9E4E47;
+  --cream: #FBF7F4;
+  --warm: #F8F1EC;
+  --petal: #FAE8E4;
+  --gold: #C9A06A;
+  --gold-light: #E8C998;
+  --gold-pale: #F5E8D0;
+  --sage: #8FAF98;
+  --sage-light: #C2D8C8;
+  --ink: #2A1F1C;
+  --muted: #7A6560;
+  --muted-light: #B0A09A;
+  --border: #E8D8D0;
+  --border-light: #F0E4DC;
+  --dark: #1A1210;
+  --dark-mid: #261A18;
+  --dark-surface: #321F1C;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--blush); }
+::-webkit-scrollbar-thumb { background: var(--rose); }
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--dark) 0%, var(--dark-mid) 50%, var(--dark-surface) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.cover-petals {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  border-radius: 50% 0 50% 0;
+  opacity: 0;
+  animation: petalFall linear infinite;
+}
+
+@keyframes petalFall {
+  0% { transform: translateY(-60px) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+.cover-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(196,114,106,0.12) 0%, transparent 65%);
+  width: 600px; height: 600px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: breathe 6s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.8; }
+  50% { transform: translate(-50%,-50%) scale(1.15); opacity: 1; }
+}
+
+.cover-corner-tl, .cover-corner-br {
+  position: absolute;
+  width: 80px; height: 80px;
+  pointer-events: none;
+  border-color: rgba(196,114,106,0.2);
+  border-style: solid;
+}
+.cover-corner-tl { top: 28px; left: 28px; border-width: 1px 0 0 1px; }
+.cover-corner-br { bottom: 28px; right: 28px; border-width: 0 1px 1px 0; }
+
+.cover-inner {
+  position: relative;
+  z-index: 2;
+  animation: riseIn 1.2s ease forwards;
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cover-script {
+  font-family: 'Great Vibes', cursive;
+  font-size: 28px;
+  color: var(--rose);
+  margin-bottom: 20px;
+  opacity: 0.9;
+  animation: riseIn 1.4s ease forwards;
+}
+
+.cover-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(100px, 22vw, 200px);
+  font-weight: 300;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(196,114,106,0.12);
+  line-height: 0.85;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -58%);
+  letter-spacing: -8px;
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.cover-days {
+  font-size: 10px;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  color: rgba(232,201,152,0.5);
+  margin-bottom: 12px;
+}
+
+.cover-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(50px, 11vw, 90px);
+  font-weight: 300;
+  color: #F5EDE8;
+  line-height: 0.95;
+  letter-spacing: 2px;
+}
+
+.cover-title em {
+  font-style: italic;
+  color: var(--blush-deep);
+  display: block;
+  font-size: clamp(60px, 13vw, 110px);
+}
+
+.cover-rule {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 240px;
+  margin: 28px auto;
+}
+.cover-rule-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(196,114,106,0.4), transparent); }
+.cover-rule-dot { color: var(--rose); font-size: 8px; letter-spacing: 4px; }
+
+.cover-sub {
+  font-size: 9px;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  color: rgba(176,160,154,0.6);
+  margin-bottom: 44px;
+}
+
+.cover-promise {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: rgba(232,201,152,0.6);
+  max-width: 320px;
+  line-height: 1.7;
+  margin: 0 auto 32px;
+}
+
+.cover-name-wrap { margin-top: 4px; }
+.cover-name-label {
+  font-size: 8px; letter-spacing: 6px; text-transform: uppercase;
+  color: rgba(196,114,106,0.4); margin-bottom: 10px; display: block;
+}
+.cover-name-input {
+  background: transparent; border: none;
+  border-bottom: 1px solid rgba(196,114,106,0.25);
+  width: 220px; text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-style: italic;
+  color: var(--blush-mid); padding: 8px 0; outline: none;
+  transition: border-color 0.3s;
+}
+.cover-name-input:focus { border-color: rgba(196,114,106,0.6); }
+.cover-name-input::placeholder { color: rgba(196,114,106,0.18); }
+
+.cover-start {
+  position: relative; z-index: 2;
+  margin-top: 40px;
+}
+.cover-start-date-label {
+  font-size: 8px; letter-spacing: 5px; text-transform: uppercase;
+  color: rgba(196,114,106,0.35); margin-bottom: 8px; display: block;
+}
+.cover-start-input {
+  background: transparent; border: none;
+  border-bottom: 1px solid rgba(196,114,106,0.2);
+  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300;
+  color: rgba(232,201,152,0.6); text-align: center;
+  padding: 6px 0; outline: none; width: 160px;
+  transition: border-color 0.3s;
+}
+.cover-start-input:focus { border-color: rgba(196,114,106,0.5); }
+
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%;
+  transform: translateX(-50%); z-index: 2;
+  text-align: center; animation: floatDown 2.5s ease-in-out infinite;
+}
+.scroll-hint span {
+  display: block; font-size: 8px; letter-spacing: 5px;
+  color: rgba(196,114,106,0.3); text-transform: uppercase; margin-bottom: 8px;
+}
+.scroll-arrow {
+  width: 18px; height: 18px; margin: 0 auto;
+  border-right: 1px solid rgba(196,114,106,0.25);
+  border-bottom: 1px solid rgba(196,114,106,0.25);
+  transform: rotate(45deg);
+}
+@keyframes floatDown {
+  0%,100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+  50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
+}
+
+/* ── PROGRESS BANNER ── */
+.progress-banner {
+  background: linear-gradient(135deg, var(--dark-mid), var(--dark-surface));
+  padding: 28px 28px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  border-bottom: 1px solid rgba(196,114,106,0.15);
+}
+
+.progress-text {
+  font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
+  color: rgba(196,114,106,0.5);
+}
+
+.progress-track {
+  flex: 1; max-width: 300px;
+  height: 2px;
+  background: rgba(196,114,106,0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--rose-dark), var(--rose), var(--blush-deep));
+  width: 0%;
+  transition: width 0.5s ease;
+}
+
+.progress-count {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 300;
+  color: var(--gold-light);
+  min-width: 60px;
+  text-align: center;
+}
+
+/* ── WEEK HEADERS ── */
+.week-header {
+  background: var(--petal);
+  border-top: 2px solid var(--blush-mid);
+  border-bottom: 1px solid var(--border-light);
+  padding: 28px 28px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.week-label {
+  font-size: 8px; letter-spacing: 6px; text-transform: uppercase;
+  color: var(--blush-deep); margin-bottom: 6px;
+}
+
+.week-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 400; font-style: italic;
+  color: var(--ink); line-height: 1.1;
+}
+
+.week-tagline {
+  font-size: 10px; font-weight: 300; letter-spacing: 3px;
+  color: var(--muted-light); text-transform: uppercase;
+  text-align: right;
+}
+
+/* ── DAYS GRID ── */
+.days-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+  border-left: 1px solid var(--border-light);
+  border-top: 1px solid var(--border-light);
+}
+
+.day-card {
+  background: var(--warm);
+  border-right: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  padding: 0;
+  overflow: hidden;
+  transition: background 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+
+.day-card:hover { background: #FDF5F2; }
+.day-card.completed { background: var(--petal); }
+
+.day-number-bar {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border-light);
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.day-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 300;
+  color: var(--muted-light);
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.day-card.completed .day-num { color: var(--rose); }
+
+.day-check {
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.day-card.completed .day-check {
+  background: var(--rose);
+  border-color: var(--rose);
+}
+
+.day-check-mark {
+  width: 5px; height: 8px;
+  border-right: 1.5px solid white;
+  border-bottom: 1.5px solid white;
+  transform: rotate(45deg) translate(-1px, -1px);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.day-card.completed .day-check-mark { opacity: 1; }
+
+.day-body { padding: 10px; }
+
+.day-emoji { font-size: 16px; display: block; margin-bottom: 6px; }
+
+.day-task {
+  font-size: 11px; font-weight: 300;
+  color: var(--ink); line-height: 1.45;
+  margin-bottom: 6px;
+}
+
+.day-card.completed .day-task {
+  text-decoration: line-through;
+  color: var(--muted-light);
+}
+
+.day-bonus {
+  font-size: 9px; font-weight: 300;
+  color: var(--muted-light); font-style: italic;
+  line-height: 1.3;
+}
+
+.day-card.completed .day-bonus { color: var(--sage); }
+
+/* ── WEEKLY REFLECTION ── */
+.week-reflection {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--warm);
+  border-left: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  padding: 24px 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.reflect-field label {
+  font-size: 8px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--sage); display: block; margin-bottom: 7px;
+}
+
+.reflect-input {
+  width: 100%; background: transparent;
+  border: none; border-bottom: 1px solid var(--border-light);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; color: var(--ink); padding: 4px 0;
+  outline: none; transition: border-color 0.2s;
+}
+
+.reflect-input:focus { border-color: var(--rose); }
+.reflect-input::placeholder { color: var(--border); font-style: italic; font-size: 13px; }
+
+/* ── FINAL SECTION ── */
+.final-section {
+  max-width: 900px;
+  margin: 48px auto 0;
+  padding: 0 0 60px;
+}
+
+.final-header {
+  padding: 40px 28px 28px;
+  border-top: 1px solid var(--border-light);
+}
+
+.final-eyebrow {
+  font-size: 8px; letter-spacing: 6px; text-transform: uppercase;
+  color: var(--blush-deep); margin-bottom: 8px; display: flex; align-items: center; gap: 10px;
+}
+.final-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border-light); }
+
+.final-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px; font-weight: 400; color: var(--ink);
+}
+.final-title em { font-style: italic; color: var(--rose-dark); }
+
+.final-grid {
+  padding: 0 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.final-card {
+  border: 1px solid var(--border-light);
+  background: var(--warm);
+  padding: 20px;
+}
+
+.final-card-label {
+  font-size: 8px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--blush-deep); margin-bottom: 10px; display: block;
+}
+
+.final-textarea {
+  width: 100%; background: transparent;
+  border: none; border-bottom: 1px solid var(--border-light);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; color: var(--ink); line-height: 1.65;
+  padding: 4px 0; outline: none; resize: none;
+  min-height: 70px; transition: border-color 0.2s;
+}
+.final-textarea:focus { border-color: var(--rose); }
+.final-textarea::placeholder { color: var(--border); font-style: italic; font-size: 13px; }
+
+/* ── SELF RATINGS ── */
+.self-ratings {
+  padding: 0 28px 28px;
+}
+
+.ratings-title {
+  font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--muted-light); margin-bottom: 18px;
+  display: flex; align-items: center; gap: 12px;
+}
+.ratings-title::after { content: ''; flex: 1; height: 1px; background: var(--border-light); }
+
+.rating-row {
+  display: flex; align-items: center; gap: 16px;
+  padding: 12px 0; border-bottom: 1px solid var(--border-light);
+}
+
+.rating-label {
+  font-size: 12px; font-weight: 300;
+  color: var(--ink); flex: 1;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+}
+
+.rating-stars {
+  display: flex; gap: 5px;
+}
+
+.star {
+  width: 22px; height: 22px;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 10px; color: var(--border);
+  transition: all 0.15s;
+}
+
+.star.lit { background: var(--gold-pale); border-color: var(--gold); color: var(--gold); }
+.star:hover { border-color: var(--gold-light); }
+
+/* ── CLOSING QUOTE ── */
+.closing {
+  background: linear-gradient(150deg, var(--dark) 0%, var(--dark-surface) 100%);
+  padding: 70px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 60px;
+}
+
+.closing::before {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(196,114,106,0.12);
+  pointer-events: none;
+}
+
+.closing-glow {
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,114,106,0.07) 0%, transparent 65%);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+
+.closing-script {
+  font-family: 'Great Vibes', cursive;
+  font-size: 48px;
+  color: rgba(196,114,106,0.15);
+  line-height: 1;
+  margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+
+.closing-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(16px, 3vw, 22px);
+  font-style: italic; font-weight: 400;
+  color: rgba(220,180,165,0.85);
+  line-height: 1.85;
+  max-width: 520px;
+  margin: 0 auto 20px;
+  position: relative; z-index: 1;
+}
+
+.closing-attr {
+  font-size: 8px; letter-spacing: 6px; text-transform: uppercase;
+  color: rgba(196,114,106,0.3);
+  position: relative; z-index: 1;
+}
+
+/* ── BTN BAR ── */
+.btn-bar {
+  background: var(--petal);
+  border-top: 1px solid var(--border-light);
+  padding: 40px 24px;
+  text-align: center;
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+}
+
+.btn-print {
+  background: linear-gradient(135deg, var(--dark), var(--dark-mid));
+  color: var(--blush-mid);
+  border: 1px solid rgba(196,114,106,0.2);
+  padding: 14px 40px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px; font-weight: 400;
+  letter-spacing: 6px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.3s;
+}
+.btn-print:hover { border-color: var(--rose); color: var(--blush-deep); letter-spacing: 7px; }
+
+.btn-reset {
+  background: transparent;
+  color: var(--muted-light);
+  border: 1px solid var(--border-light);
+  padding: 14px 24px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px; font-weight: 400;
+  letter-spacing: 5px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.3s;
+}
+.btn-reset:hover { border-color: var(--border); color: var(--muted); }
+
+/* ── NAV ── */
+.nav-dots {
+  position: fixed; right: 18px; top: 50%;
+  transform: translateY(-50%); z-index: 200;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.nav-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--border); cursor: pointer; transition: all 0.3s;
+}
+.nav-dot.active { background: var(--rose); transform: scale(1.8); }
+
+/* ── PRINT ── */
+@media print {
+  .scroll-hint, .btn-bar, .nav-dots, .progress-banner { display: none !important; }
+  .cover { min-height: auto; page-break-after: always; }
+  .day-card { break-inside: avoid; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .days-grid { grid-template-columns: repeat(5, 1fr); }
+  .week-reflection { grid-template-columns: 1fr; }
+  .final-grid { grid-template-columns: 1fr; }
+  .nav-dots { display: none; }
+  .progress-banner { gap: 14px; }
+  .week-header { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .days-grid { grid-template-columns: repeat(4, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<div class="nav-dots" id="navDots">
+  <div class="nav-dot active" title="Cover"></div>
+  <div class="nav-dot" title="Week 1"></div>
+  <div class="nav-dot" title="Week 2"></div>
+  <div class="nav-dot" title="Week 3"></div>
+  <div class="nav-dot" title="Week 4"></div>
+  <div class="nav-dot" title="Final Glow"></div>
+</div>
+
+<!-- ── COVER ── -->
+<div class="cover" id="sec-cover">
+  <div class="cover-petals" id="petals"></div>
+  <div class="cover-glow"></div>
+  <div class="cover-corner-tl"></div>
+  <div class="cover-corner-br"></div>
+  <div class="cover-number">30</div>
+
+  <div class="cover-inner">
+    <div class="cover-script">Glow Up</div>
+    <div class="cover-days">30 Days to</div>
+    <h1 class="cover-title">Your<br><em>Glow</em></h1>
+
+    <div class="cover-rule">
+      <div class="cover-rule-line"></div>
+      <div class="cover-rule-dot">✦</div>
+      <div class="cover-rule-line"></div>
+    </div>
+
+    <p class="cover-sub">Skin &nbsp;·&nbsp; Body &nbsp;·&nbsp; Mind &nbsp;·&nbsp; Soul</p>
+
+    <p class="cover-promise">30 days. 30 intentional choices. One radiant new version of you.</p>
+
+    <div class="cover-name-wrap">
+      <span class="cover-name-label">Beginning this journey</span>
+      <input class="cover-name-input" type="text" placeholder="Your Name">
+    </div>
+
+    <div class="cover-start">
+      <span class="cover-start-date-label">Start Date</span>
+      <input class="cover-start-input" type="date" id="startDate">
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Begin</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</div>
+
+<!-- ── PROGRESS BANNER ── -->
+<div class="progress-banner">
+  <div class="progress-text">Progress</div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  <div class="progress-count" id="progressCount">0 / 30</div>
+</div>
+
+<!-- JS inserts weeks here -->
+<div id="plannerBody"></div>
+
+<!-- ── FINAL SECTION ── -->
+<div class="final-section" id="sec-final">
+  <div class="final-header">
+    <div class="final-eyebrow">Day 30 Complete</div>
+    <div class="final-title">Your <em>Glow-Up</em> Reflection</div>
+  </div>
+
+  <div class="final-grid">
+    <div class="final-card">
+      <span class="final-card-label">How I feel now vs Day 1</span>
+      <textarea class="final-textarea" placeholder="Describe the shift you feel..."></textarea>
+    </div>
+    <div class="final-card">
+      <span class="final-card-label">My biggest transformation</span>
+      <textarea class="final-textarea" placeholder="What changed most?"></textarea>
+    </div>
+    <div class="final-card">
+      <span class="final-card-label">Habits I'm keeping forever</span>
+      <textarea class="final-textarea" placeholder="List the non-negotiables..."></textarea>
+    </div>
+    <div class="final-card">
+      <span class="final-card-label">A note to my glowed-up self</span>
+      <textarea class="final-textarea" placeholder="Dear glowing me..."></textarea>
+    </div>
+  </div>
+
+  <div class="self-ratings">
+    <div class="ratings-title">Rate Your Glow-Up (Before → After)</div>
+    <div id="ratingRows"></div>
+  </div>
+</div>
+
+<!-- ── CLOSING ── -->
+<div class="closing">
+  <div class="closing-glow"></div>
+  <div class="closing-script">Radiant</div>
+  <p class="closing-quote">You didn't just glow up on the outside. You showed up for yourself, day after day — and that is the real transformation.</p>
+  <div class="closing-attr">✦ &nbsp; You did it &nbsp; ✦</div>
+</div>
+
+<!-- ── BUTTON BAR ── -->
+<div class="btn-bar">
+  <button class="btn-print" onclick="window.print()">Print &nbsp;/&nbsp; Save as PDF</button>
+  <button class="btn-reset" onclick="if(confirm('Reset all progress?')) resetAll()">Reset</button>
+</div>
+
+<script>
+// ── PETAL ANIMATION ──
+const petalContainer = document.getElementById('petals');
+const petalColors = ['rgba(212,160,144,0.4)', 'rgba(196,114,106,0.3)', 'rgba(245,230,224,0.3)', 'rgba(201,160,106,0.25)'];
+for (let i = 0; i < 18; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  const size = Math.random() * 10 + 6;
+  p.style.cssText = `
+    width: ${size}px; height: ${size}px;
+    left: ${Math.random() * 100}%;
+    top: -20px;
+    background: ${petalColors[Math.floor(Math.random() * petalColors.length)]};
+    animation-duration: ${Math.random() * 8 + 10}s;
+    animation-delay: ${Math.random() * 12}s;
+    border-radius: ${Math.random() > 0.5 ? '50% 0 50% 0' : '0 50% 0 50%'};
+  `;
+  petalContainer.appendChild(p);
+}
+
+// ── 30 DAYS DATA ──
+const days = [
+  // WEEK 1 — Foundation
+  { emoji: '💧', task: 'Drink 8 glasses of water today', bonus: 'Add lemon for extra glow' },
+  { emoji: '🧴', task: 'Start a 3-step skincare routine AM + PM', bonus: 'Cleanser, toner, moisturizer' },
+  { emoji: '🚶‍♀️', task: '30-minute walk outside', bonus: 'No phone — just breathe' },
+  { emoji: '🥗', task: 'Eat 5 servings of fruits & vegetables', bonus: 'Focus on colorful choices' },
+  { emoji: '😴', task: 'Sleep before midnight, wake up early', bonus: 'Silk pillowcase bonus' },
+  { emoji: '📵', task: 'No screens 1 hour before bed', bonus: 'Read or journal instead' },
+  { emoji: '🛁', task: 'Pamper bath or shower ritual', bonus: 'Exfoliate + body oil' },
+  // WEEK 2 — Build
+  { emoji: '💪', task: '20-minute workout of your choice', bonus: 'YouTube, gym, or dance' },
+  { emoji: '🧘', task: '10-minute morning meditation', bonus: 'Try a guided breathing app' },
+  { emoji: '✍️', task: 'Write 3 affirmations & say them aloud', bonus: 'Mirror talk counts!' },
+  { emoji: '🥤', task: 'Replace one coffee with green tea', bonus: 'Antioxidants for your skin' },
+  { emoji: '💆', task: '5-minute facial massage with oil', bonus: 'Rosehip or argan oil' },
+  { emoji: '📚', task: 'Read 20 pages of something inspiring', bonus: 'Audiobooks count' },
+  { emoji: '🫶', task: 'Do one kind thing for yourself', bonus: 'No guilt, pure self-love' },
+  // WEEK 3 — Elevate
+  { emoji: '🌅', task: 'Wake up 30 mins earlier than usual', bonus: 'Use it for YOU time' },
+  { emoji: '🧂', task: 'Cook a nourishing meal from scratch', bonus: 'No takeout today' },
+  { emoji: '🎨', task: 'Try a new look — makeup, outfit, hair', bonus: 'Play, experiment, have fun' },
+  { emoji: '💤', task: 'Take a proper power nap (20 mins)', bonus: 'Set an alarm — no more' },
+  { emoji: '🌿', task: 'Add a supplement: collagen or vitamin C', bonus: 'Check with your doctor' },
+  { emoji: '🫧', task: 'Deep-clean your bedroom & workspace', bonus: 'Clear space = clear mind' },
+  { emoji: '🧃', task: 'Drink a homemade glow smoothie', bonus: 'Spinach, banana, berries' },
+  // WEEK 4 — Glow
+  { emoji: '📸', task: 'Take progress photos (for your eyes only)', bonus: 'Compare Day 1 vs Now' },
+  { emoji: '🧠', task: 'Brain dump — release all your thoughts', bonus: 'Write without editing' },
+  { emoji: '☀️', task: 'Get 15 mins of morning sunlight', bonus: 'Vitamin D + mood boost' },
+  { emoji: '💌', task: 'Write a love letter to your body', bonus: 'Be gentle, be honest' },
+  { emoji: '🩺', task: 'Book a health check or self-exam', bonus: 'Dental, skin, or GP' },
+  { emoji: '🌙', task: 'Create your ideal night routine', bonus: 'Write it down & commit' },
+  { emoji: '🎯', task: 'Set 3 goals for the next 30 days', bonus: 'Build on your momentum' },
+  { emoji: '🫂', task: 'Connect deeply with someone you love', bonus: 'Phone call or quality time' },
+  { emoji: '✨', task: 'Celebrate! You completed 30 days!', bonus: 'You earned this glow 🌟' },
+];
+
+const weeks = [
+  { title: 'Foundation', tagline: 'Build your base', label: 'Week One', days: [1,2,3,4,5,6,7], id: 'sec-w1' },
+  { title: 'Build Momentum', tagline: 'Layer by layer', label: 'Week Two', days: [8,9,10,11,12,13,14], id: 'sec-w2' },
+  { title: 'Elevate', tagline: 'Rise to your next level', label: 'Week Three', days: [15,16,17,18,19,20,21], id: 'sec-w3' },
+  { title: 'Glow', tagline: 'Let it all shine', label: 'Week Four', days: [22,23,24,25,26,27,28,29,30], id: 'sec-w4' },
+];
+
+const completedDays = new Set(JSON.parse(localStorage.getItem('glowup-completed') || '[]'));
+
+function saveProgress() {
+  localStorage.setItem('glowup-completed', JSON.stringify([...completedDays]));
+}
+
+function updateProgress() {
+  const count = completedDays.size;
+  const pct = (count / 30) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressCount').textContent = count + ' / 30';
+}
+
+const body = document.getElementById('plannerBody');
+
+weeks.forEach((week, wi) => {
+  // Week header
+  const wh = document.createElement('div');
+  wh.className = 'week-header';
+  wh.id = week.id;
+  wh.innerHTML = `
+    <div>
+      <div class="week-label">${week.label}</div>
+      <div class="week-title">${week.title}</div>
+    </div>
+    <div class="week-tagline">${week.tagline}</div>
+  `;
+  body.appendChild(wh);
+
+  // Days grid
+  const grid = document.createElement('div');
+  grid.className = 'days-grid';
+
+  week.days.forEach(dayNum => {
+    const d = days[dayNum - 1];
+    const card = document.createElement('div');
+    card.className = 'day-card' + (completedDays.has(dayNum) ? ' completed' : '');
+    card.dataset.day = dayNum;
+    card.innerHTML = `
+      <div class="day-number-bar">
+        <div class="day-num">${String(dayNum).padStart(2,'0')}</div>
+        <div class="day-check"><div class="day-check-mark"></div></div>
+      </div>
+      <div class="day-body">
+        <span class="day-emoji">${d.emoji}</span>
+        <div class="day-task">${d.task}</div>
+        <div class="day-bonus">+ ${d.bonus}</div>
+      </div>
+    `;
+    card.addEventListener('click', () => {
+      const n = parseInt(card.dataset.day);
+      if (completedDays.has(n)) completedDays.delete(n);
+      else completedDays.add(n);
+      card.classList.toggle('completed');
+      saveProgress();
+      updateProgress();
+    });
+    grid.appendChild(card);
+  });
+
+  body.appendChild(grid);
+
+  // Week reflection
+  const ref = document.createElement('div');
+  ref.className = 'week-reflection';
+  ref.innerHTML = `
+    <div class="reflect-field">
+      <label>Best moment this week</label>
+      <input class="reflect-input" type="text" placeholder="What made you smile?">
+    </div>
+    <div class="reflect-field">
+      <label>Biggest challenge</label>
+      <input class="reflect-input" type="text" placeholder="What was hard?">
+    </div>
+    <div class="reflect-field">
+      <label>My glow note</label>
+      <input class="reflect-input" type="text" placeholder="One thing I noticed...">
+    </div>
+  `;
+  body.appendChild(ref);
+});
+
+// ── SELF RATINGS ──
+const ratingCategories = [
+  'Skin & Appearance', 'Energy Levels', 'Mental Clarity',
+  'Confidence', 'Sleep Quality', 'Body Strength'
+];
+
+const ratingRows = document.getElementById('ratingRows');
+ratingCategories.forEach(cat => {
+  const row = document.createElement('div');
+  row.className = 'rating-row';
+  let stars = '';
+  for (let s = 1; s <= 5; s++) {
+    stars += `<div class="star" data-val="${s}" onclick="rateStar(this)">★</div>`;
+  }
+  row.innerHTML = `<div class="rating-label">${cat}</div><div class="rating-stars">${stars}</div>`;
+  ratingRows.appendChild(row);
+});
+
+function rateStar(el) {
+  const val = parseInt(el.dataset.val);
+  const stars = el.closest('.rating-stars').querySelectorAll('.star');
+  stars.forEach((s, i) => s.classList.toggle('lit', i < val));
+}
+
+// ── NAV DOTS ──
+const navSections = ['sec-cover', 'sec-w1', 'sec-w2', 'sec-w3', 'sec-w4', 'sec-final'];
+const navDots = document.querySelectorAll('.nav-dot');
+navDots.forEach((dot, i) => {
+  dot.addEventListener('click', () => {
+    document.getElementById(navSections[i])?.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+const secObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = navSections.indexOf(entry.target.id);
+      navDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+  });
+}, { threshold: 0.3 });
+
+navSections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) secObserver.observe(el);
+});
+
+// ── RESET ──
+function resetAll() {
+  completedDays.clear();
+  saveProgress();
+  document.querySelectorAll('.day-card').forEach(c => c.classList.remove('completed'));
+  updateProgress();
+}
+
+// ── INIT ──
+updateProgress();
+</script>
+</body>
+</html>
